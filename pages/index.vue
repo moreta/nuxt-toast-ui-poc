@@ -5,65 +5,31 @@
         nuxt-toast-ui-poc
       </h1>
       <div class="main">
-        <ClientOnly placeholder="Loading...">
-          <div
-            id="editor"
-            ref="editorEl"
-          ></div>
-          <div>
-            <button @click="handleClick">
-              result
-            </button>
-            <div>{{ htmlResult }}</div>
-          </div>
-        </ClientOnly>
+        <h2>Editor by tui.editor vue-editor component</h2>
+        <EditorPlain></EditorPlain>
+
+        <h2>Editor by tui.editor vue-editor component</h2>
+        <EditorVue></EditorVue>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from '@nuxtjs/composition-api'
-import Editor, { EditorOptions } from '@toast-ui/editor'
+import { defineComponent } from '@nuxtjs/composition-api'
+import EditorPlain from '~/components/EditorPlain.vue'
+import EditorVue from '~/components/EditorVue.vue'
 
 export default defineComponent({
+  components: {
+    EditorPlain,
+    EditorVue
+  },
   setup () {
-    const editorEl = ref<HTMLElement | null>(null)
-    const editor = ref<Editor | null>(null)
 
-    if (process.client) {
-      const Editor = require('@toast-ui/editor')
-      watch(() => editorEl.value, (editorElValue) => {
-        if (editorElValue) {
-          const editorOption: EditorOptions = {
-            el: editorElValue,
-            height: '500px',
-            initialEditType: 'wysiwyg',
-            previewStyle: 'vertical'
-          }
-          editor.value = new Editor(editorOption)
-        }
-      })
-    }
-
-    const htmlResult = ref<string>('')
-    const handleClick = () => {
-      if (editor.value) {
-        htmlResult.value = editor.value.getHtml()
-      }
-    }
-
-    return {
-      editorEl,
-      htmlResult,
-      handleClick
-    }
   }
 })
 </script>
-
-<style src="codemirror/lib/codemirror.css"></style>
-<style src="@toast-ui/editor/dist/toastui-editor.css"></style>
 <style>
 .container {
   margin: 0 auto;
@@ -72,6 +38,10 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+h2 {
+  font-size: 24px;
 }
 
 </style>

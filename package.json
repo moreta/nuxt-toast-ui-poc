@@ -16,6 +16,7 @@
     "@nuxtjs/composition-api": "^0.12.5",
     "@nuxtjs/pwa": "^3.0.2",
     "@toast-ui/editor": "^2.4.0",
+    "@toast-ui/vue-editor": "^2.4.0",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.5"
   },
